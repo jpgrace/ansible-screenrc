@@ -5,13 +5,19 @@
     state: present
   with_items:
     - iftop
+  tags:
+    - screenrc
 
 - name: ensure ~/.screenrc exists
   file:
     path: ~/.screenrc
     state: present
+  tags:
+    - screenrc
 
 - name: create .screenrc from template
   template:
     src: screenrc.j2
     dest: ~/.screenrc
+  tags:
+    - screenrc
