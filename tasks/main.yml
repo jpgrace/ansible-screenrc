@@ -2,6 +2,8 @@
 - name: update apt-keys
   become: yes
   command: apt-key update
+  tags:
+    - screenrc
 
 - name: install deps
   become: yes
