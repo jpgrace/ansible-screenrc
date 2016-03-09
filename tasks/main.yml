@@ -1,18 +1,15 @@
 ---
+- name: update apt-keys
+  command: apt-key update
+
 - name: install deps
   become: yes
   apt:
     name: "{{ item }}"
     state: present
+    update_cache: yes
   with_items:
     - iftop
-  tags:
-    - screenrc
-
-- name: ensure ~/.screenrc exists
-  file:
-    path: ~/.screenrc
-    state: present
   tags:
     - screenrc
 
