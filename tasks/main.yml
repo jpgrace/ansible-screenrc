@@ -1,5 +1,6 @@
 ---
 - name: install deps
+  become: yes
   apt:
     name: "{{ item }}"
     state: present
