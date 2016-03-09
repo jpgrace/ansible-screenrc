@@ -1,0 +1,17 @@
+---
+- name: install deps
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - iftop
+
+- name: ensure ~/.screenrc exists
+  file:
+    path: ~/.screenrc
+    state: present
+
+- name: create .screenrc from template
+  template:
+    src: screenrc.j2
+    dest: ~/.screenrc
