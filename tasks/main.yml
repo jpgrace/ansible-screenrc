@@ -16,6 +16,22 @@
   tags:
     - screenrc
 
+- name: add user to adm group
+  become: yes
+  user:
+    name: "{{ ansible_user }}"
+    groups: adm
+    append: yes
+    state: present
+  tags:
+    - screenrc
+
+- name: register users groups
+  command: "groups {{ ansible_user }}"
+  register: user_groups
+  tags:
+    - screenrc
+
 - name: create .screenrc from template
   template:
     src: screenrc.j2
