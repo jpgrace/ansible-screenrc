@@ -2,6 +2,8 @@
 - name: update apt-keys
   become: yes
   command: apt-key update
+  tags:
+    - screenrc
 
 - name: install deps
   become: yes
@@ -11,6 +13,22 @@
     update_cache: yes
   with_items:
     - iftop
+  tags:
+    - screenrc
+
+- name: add user to adm group
+  become: yes
+  user:
+    name: "{{ ansible_user }}"
+    groups: adm
+    append: yes
+    state: present
+  tags:
+    - screenrc
+
+- name: register users groups
+  command: "groups {{ ansible_user }}"
+  register: user_groups
   tags:
     - screenrc
 
